@@ -16,6 +16,7 @@
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
                             name="email"  required/>
+                            <div class="form-text text-danger" *ngIf="forgotForm.controls['email'].touched && !forgotForm.controls['email'].valid ">email is required in correct format</div>
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary w-100"  name="">

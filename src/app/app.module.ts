@@ -5,8 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { AuthInterceptor } from './authComponent/interceptor/auth.interceptor';
+import { ChatServiceService } from './mainDashboard/services/chat-service.service';
+import { SocketconnectionService } from './services/socket/socketconnection.service';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +21,12 @@ import { ActivatedRoute } from '@angular/router';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true
+    },
+    SocketconnectionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

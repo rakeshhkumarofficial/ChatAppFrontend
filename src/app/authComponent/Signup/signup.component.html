@@ -12,38 +12,61 @@
                 <p style="color: lightslategray; text-align: center;">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your 
                     details to register&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <form [formGroup]="registerForm" (ngSubmit)="registerUser()" >
+                <form [formGroup]="registerForm"  (ngSubmit)="registerUser()" >
                     <div class="form-group">
-                        <input type="name" id="first" placeholder="FirstName" class="form-control" formControlName="firstName"
+                        <input type="name" id="firstName" placeholder="FirstName" class="form-control" formControlName="firstName"
                             name="firstName"  required/>
+                            <div class="form-text text-danger" *ngIf="registerForm.controls['firstName'].touched && !registerForm.controls['firstName'].valid ">First name is required</div>
                     </div>
                     <br>
                     <div class="form-group">
                         <input type="name" id="first" placeholder="LastName" class="form-control" formControlName="lastName"
                             name="lastName"  required/>
+                            <div class="form-text text-danger" *ngIf="registerForm.controls['lastName'].touched && !registerForm.controls['lastName'].valid">Lastname is required</div>
                     </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Please select your gender</label>
+                        <div class="row">
+                          <label class="md-check">
+                            <input type="radio" value="2" name="gender" formControlName="gender">
+                            Female
+                          </label>
+                          <label class="md-check">
+                            <input type="radio" value="1" name="gender" formControlName="gender">     
+                            Male
+                          </label>
+                          <div class="form-text text-danger" *ngIf="registerForm.controls['gender'].touched && !registerForm.controls['gender'].valid ">plz select your gender</div>
+                        </div>
+                      </div>
                     <br>
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
                             name="email"  required/>
+                            <div class="form-text text-danger" *ngIf="registerForm.controls['email'].touched && !registerForm.controls['email'].valid ">email is required in correct format</div>
                     </div>
                     <br>
                     <div class="form-group">
                         <input type="number" id="phone" placeholder="Phone No" class="form-control" formControlName="phone"
                             name="phone"  required/>
+                            <div class="form-text text-danger" *ngIf="registerForm.controls['phone'].touched && !registerForm.controls['phone'].valid">valid 10 digit phone is required</div>
                     </div>
                     <br>
                     <div class="form-group">
                         <input type="password" id="password" placeholder="Password" class="form-control"
                             formControlName="password" name="password" />
+                            <div class="form-text text-danger" *ngIf="registerForm.controls['password'].touched && !registerForm.controls['password'].valid">password is required min 8 digit with title case and one symbol </div>
                     </div>
+                    
                     <br>
+                   
                     <div class="form-group">
-                        <input type="date" id="date" placeholder="Date of Birth" class="form-control"
+                        <input type="date" id="date" placeholder="Date of Birth" class="form-control" (change)="validDate($event)" 
                             formControlName="dateOfBirth" name="dateOfBirth" />
+                            <div class="form-text text-danger" *ngIf="validAge || (registerForm.controls['dateOfBirth'].touched && !registerForm.controls['dateOfBirth'].valid)" >you should be minimum 12 years old</div>
                     </div>
                     <br>
-                    <input type="submit" class="btn btn-primary w-100" value="Sign Up" name="">
+                    <input type="submit" class="btn btn-primary w-100" value="Sign Up" name="submit" >
                 </form>
             </div>
             <div class="card-footer text-left">

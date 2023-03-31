@@ -16,11 +16,13 @@
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
                             name="email"  required/>
+                            <div class="form-text text-danger" *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid ">email is required in correct format</div>
                     </div>
                     <br>
                     <div class="form-group">
                         <input type="password" id="password" placeholder="Password" class="form-control"
                             formControlName="password" name="password" />
+                            <div class="form-text text-danger" *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">password is required min 8 digit with title case and one symbol </div>
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary w-100" value="Login" name="">

@@ -4,26 +4,47 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Token } from '@angular/compiler';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-reset',
   templateUrl: './reset.component.html',
 })
 export class ResetComponent {
-  resetForm = new FormGroup({
-    password: new FormControl(''),
-  });
-  constructor(private authData :AuthService,private routes:Router , private route :ActivatedRoute) {
+  token:string='';
+  passwordsMatching = false;
+  isConfirmPasswordDirty = false;
+  confirmPasswordClass = 'form-control';
+  resetForm :FormGroup
+ 
+  constructor(private authData :AuthService,private routes:Router , private route :ActivatedRoute ,private fb:FormBuilder) {
     this.route.queryParams.subscribe(params => {
-        console.log(params['token']);
+        this.token=params['token'];
+        this.authData.registerToken(this.token)
       });
+      this.resetForm = this.fb.group({
+        newPassword: ['', Validators.compose([Validators.required, Validators.pattern('^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')])],
+        confirmPassword: ['', Validators.compose([Validators.required, Validators.pattern('^(?=.{6,})(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')])]
+      })
   }
   resetUser(){
-    // this.authData.forgotUser(this.resetForm.value.password).subscribe((res:any)=>{
-    //   console.log(res);
-      
-    // })
+    if (this.resetForm.valid && this.passwordsMatching == true){
+    this.authData.resetPassword(this.resetForm.value).subscribe((res:any)=>{
+      console.log(res);
+      this.authData.removeToken();
+      this.resetForm.reset();
+      Swal.fire(
+        'password change  sucessfully',
+        'login again',
+        'success'
+      )
+      this.routes.navigateByUrl("/main/login")
+    })
     console.warn(this.resetForm.value)
   }
+  else{
+    Object.keys(this.resetForm.controls).forEach(key => this.resetForm.controls[key].markAsTouched({ onlySelf: true }))
+  }
+}
   SignUp()
   {
     this.routes.navigateByUrl("/main/signup")
@@ -31,5 +52,14 @@ export class ResetComponent {
   login(){
     this.routes.navigateByUrl("/main/login")
   }
-
+  checkPasswords(pw: string, cpw: string) {
+    this.isConfirmPasswordDirty = true;
+    if (pw == cpw) {
+      this.passwordsMatching = true;
+      this.confirmPasswordClass = 'form-control is-valid';
+    } else {
+      this.passwordsMatching = false;
+      this.confirmPasswordClass = 'form-control is-invalid';
+    }
+  }
 }

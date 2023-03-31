@@ -20,7 +20,8 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem('token');
-    this.router.navigate(['login']);
+    localStorage.clear();
+    this.router.navigate(['/main/login']);
   }
   loginUser(data:any){
    return this.http.post(`${baseUrl}`+constant.Auth.login ,data)
@@ -28,13 +29,38 @@ export class AuthService {
   registerUser(data:any){
     return this.http.post(`${baseUrl}`+constant.Auth.signIn,data)
   }
+  changePass(data:any){
+    return this.http.put('http://192.180.0.127:4040/api/User/ChangePassword',data)
+  }
+  resetPassword(newpassword:any){
+    return this.http.post(`${baseUrl}`+constant.Auth.reset,newpassword)
+  }
   forgotUser(url:string,email:any){
     console.log(url);
     console.log(email);
     return this.http.post(`${baseUrl}`+constant.Auth.forgot,{url,email})
   }
+  updateProfile(data:any){
+    return this.http.put('http://192.180.0.127:4040/api/User/Update',data)
+
+  }
   registerToken(value:string)
   {
       localStorage.setItem("token",value)
+  }
+  removeToken(){
+    localStorage.clear();
+  }
+  getuserDetails(){
+   return this.http.get('http://192.180.0.127:4040/api/User/GetUser')
+  }
+
+  uploadFile(File:any,data:any){
+    console.log(File)
+    const params = {
+      type : data
+    }
+    console.log(data,"data")
+    return this.http.post('http://192.180.0.127:4040/api/File/FileUpload',File, {params : params})
   }
 }

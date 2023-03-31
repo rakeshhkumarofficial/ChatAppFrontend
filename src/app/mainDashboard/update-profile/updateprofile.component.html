@@ -1,0 +1,73 @@
+
+<div class="container vh-100">
+    <div class="row justify-content-center h-100">
+        <div class="card my-auto shadow">
+            <div class="card-body px-5">
+                <div class="text-center">
+                   
+                </div>
+                <div class="text-center">
+                    <h2>Welcome</h2>
+                    <a  target="_blank" download="custom-filename.jpg" class="rounded" href="{{profilePic}}"><img width="200" height="200" style="border-radius: 50%" src={{profilePic}}></a>
+                    <form>
+                        <div class="form-control">
+                            <input type="file"  class="form-control" accept="image/*" (change)="upload($event)" >
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                <p style="color: lightslategray; text-align: center;" class="text-center">
+                    plz enter your detail to updateForm</p>
+                <form  [formGroup]="updateprofileForm"  (ngSubmit)="updateForm()" >
+                    <div class="form-group">
+                        <input type="name" id="firstName" placeholder="FirstName" class="form-control" formControlName="firstName"
+                            name="firstName"  required/>
+                            <div class="form-text text-danger" *ngIf="updateprofileForm.controls['firstName'].touched && !updateprofileForm.controls['firstName'].valid">FirstName is required</div>
+                    </div>
+                   
+                    <br>
+                    <div class="form-group">
+                        <input type="name" id="first" placeholder="LastName" class="form-control" formControlName="lastName"
+                            name="lastName"  required/>
+                            <div class="form-text text-danger" *ngIf="updateprofileForm.controls['lastName'].touched && !updateprofileForm.controls['lastName'].valid">Lastname is required</div>
+                            </div>
+                           
+                    
+                          
+                    <br>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder={{this.userData?.data?.email}} class="form-control" 
+                            name="email"  required disabled/>
+                    </div>
+                    <br>
+                        <label>Please select your gender</label>
+                        <div class="row">
+                          <label class="md-check">
+                            <input type="radio" value="2" name="gender" formControlName="gender">
+                            Female
+                          </label>
+                          <label class="md-check">
+                            <input type="radio" value="1" name="gender" formControlName="gender">     
+                            Male
+                          </label>
+                        </div>
+                   
+                    <br>
+                    <div class="form-group">
+                        <input type="number" id="phone" placeholder="Phone No" class="form-control" formControlName="phone"
+                            name="phone"  required/>
+                            <div class="form-text text-danger" *ngIf="updateprofileForm.controls['phone'].touched && !updateprofileForm.controls['phone'].valid">valid 10 digit phone is required</div>   
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="date" id="date" placeholder="01-3-1999" class="form-control" 
+                            value="23-04-2022" name="dateOfBirth"  formControlName="dateOfBirth"  (change)="validDate($event)"/>
+                    <div class="form-text text-danger" *ngIf="validAge || (updateprofileForm.controls['dateOfBirth'].touched && !updateprofileForm.controls['dateOfBirth'].valid)" >you should be minimum 12 years old</div>
+                    <br>
+                    <input type="submit" class="btn btn-primary w-100" value="Update profile" name="submit" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

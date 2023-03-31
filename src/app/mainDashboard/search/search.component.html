@@ -1,0 +1,103 @@
+<body>
+  <div class="container">
+    <div class="row">
+      <section class="discussions">
+        <div class="discussion search">
+          <div class="searchbar">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <form [formGroup]="searchForm" (ngSubmit)="searchUser()">
+              <input type="text" placeholder="Search" formControlName="name">
+              <br>
+              <input type="submit" value="search">
+            </form>
+          </div>
+        </div>
+        <div class="discussion message" *ngFor="let users of allsearchUser">
+          <div class="photo"
+            style="background-image: url({{users.profilePic}});">
+            <a></a>
+            <div class="online"></div>
+          </div>
+          <div class="desc-contact" class="btn" (click)="startchat(users)">
+            <p class="name">{{users.firstName}}</p>
+            <p class="message">9 pm at the bar if possible 😳</p>
+          </div>
+          <div class="timer">12 sec</div>
+        </div>
+        <div class="discussion message" *ngFor="let users of getchatData?.data">
+          <div class="photo"
+        > <a  target="_blank" download="custom-filename.jpg"  href="{{users.profilePic}}"><img  src={{users.profilePic}}></a>
+            <div class="online"></div>
+            <p class="message"*ngIf="users.isActive==true">Online</p>
+            <p class="message"*ngIf="users.isActive==false">offline</p>
+          </div>
+          <div class="desc-contact" class="btn" (click)="startchat(users)">
+            <p class="name">{{users.firstName}}</p>
+           
+          </div>
+          <div class="timer">12 sec</div>
+        </div>
+
+
+      </section>
+      <section class="chat">
+        <div class="header-chat">
+          <i class="icon fa fa-user-o" aria-hidden="true"></i>
+          <p class="name">{{userName}}</p>
+          <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
+        </div>
+        <div style="overflow-y: scroll; height:400px;" id="scroll">        
+          <div class="messages-chat"  *ngFor="let msg of old_msg">
+
+
+          <div *ngIf="msg.senderEmail==userEmail; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <div class="message" >
+              <div class="photo"
+                style="background-image: url({{demoProfile}});">
+                <div class="online"></div>
+              </div>
+              <a  target="_blank" download="custom-filename.jpg" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="200" height="200" src={{msg.messages}}></a>
+                <p  *ngIf="msg?.messageType==1" class="text"> {{msg.messages}} </p>
+                <p><a  target="_blank" *ngIf="msg?.messageType==3" href={{msg.messages}}>click here to download file</a></p>
+               </div>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="message text-only">
+              <div class="response">
+                <a  target="_blank" download="custom-filename.jpg" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="200" height="200" src={{msg.messages}}></a>
+                <p  *ngIf="msg?.messageType==1" class="text"> {{msg.messages}} </p>
+                <p><a  target="_blank" *ngIf="msg?.messageType==3" href={{msg.messages}}>click here to download file</a></p>
+              </div>
+            </div>
+          </ng-template>
+        </div></div>
+
+        <div>
+          <br>
+          <form [formGroup]="sendMessage" (ngSubmit)="sendMsg()">
+            <input type="text" placeholder="msg" value="helllo" formControlName="msg">
+          <form >
+            <select value="id" (change)="onChange($event)">
+              <option  >upload file</option>
+              <option  value=2>img</option>
+              <option value=3>pdf</option>
+            </select>
+            <div *ngIf="x==2">
+              <form (change)="upload(2,$event)">
+                <input  type="file" accept="image/*"  placeholder="upload file">
+              </form></div>
+            <div *ngIf="x==3">
+              <form (change)="upload(3,$event)">
+                <input  type="file" accept="pdf/*" accept="application/pdf"  placeholder="upload file"  >
+              
+              </form>
+            </div>
+          </form>
+            <input type="submit" value="send msg">
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>

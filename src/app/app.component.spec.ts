@@ -1,35 +1,41 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-
-describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+import { LoginComponent } from './authComponent/Login/login.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+describe('ContactFormComponent', () => {
+  let component: LoginComponent;
+  let fixture: ComponentFixture<LoginComponent>;
+let email=['tarunsharma98555@gmail.com','tarunsharma98855gmail.com','tarunsharma@9855@gmail.com']
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ LoginComponent ],
       imports: [
-        RouterTestingModule
+        ReactiveFormsModule,
+        HttpClientModule,
       ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  });
+    })
+    .compileComponents();
+  }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'auth'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('auth');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('auth app is running!');
+  });
+
+  it('should create', () => {
+    for (let x=0;x<2;x++){
+      console.log(x)
+    component.loginForm.setValue({
+      "email":email[x], 
+      "password":'Tarun@123@'
+    });
+    expect(component.loginForm.valid).toEqual(true);
+  }
   });
 });
+
+

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForgotComponent } from './Forgot/forgot.component';
 import { LoginComponent } from './Login/login.component';
 import { MainAuthComponent } from './Main/main.component';
+import { profileComponent } from './profile/profile.component';
 import { ResetComponent } from './Resetpassword/reset.component';
 import { SignupComponent } from './Signup/signup.component';
 
@@ -15,6 +16,7 @@ const routes: Routes = [
           { path: 'login', component: LoginComponent },
           { path: 'signup', component: SignupComponent },
           {path: 'main',component:MainAuthComponent},
+          {path:'profile',component:profileComponent},
           {path: 'forgot',component:ForgotComponent},
           {path:'reset',component:ResetComponent},
           {path: '', redirectTo: '/main/login', pathMatch: 'full' },

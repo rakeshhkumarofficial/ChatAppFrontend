@@ -1,0 +1,27 @@
+
+<div class="container vh-100">
+    <div class="row justify-content-center h-100">
+        <div class="card my-auto shadow">
+            <div class="card-body px-5">
+                <div class="text-center">
+                    <img src="cinqueterre.jpg" class="rounded" alt="Cinque Terre">
+                </div>
+                <div class="text-center">
+                    <h2>plz upload your profile</h2>
+                </div>
+                <p style="color: lightslategray; text-align: center;" class="text-center"></p>
+                <form>
+                    <div class="form-control">
+                        <input type="file"  class="form-control" accept="image/*" (change)="upload($event)" >
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-primary w-100"  value="Skip"  (click)="skip()" >
+                    <br>
+                </form>
+            </div>
+            <div class="card-footer text-left">
+                
+            </div>
+        </div>
+    </div>
+</div>

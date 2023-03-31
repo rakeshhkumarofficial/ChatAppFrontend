@@ -8,7 +8,6 @@ import { MainAuthComponent } from './Main/main.component';
 import { ForgotComponent } from './Forgot/forgot.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ResetComponent } from './Resetpassword/reset.component';
-import { ActivatedRoute } from '@angular/router';
 
 @NgModule({
   declarations: [SignupComponent,LoginComponent,MainAuthComponent,ForgotComponent,ResetComponent],
