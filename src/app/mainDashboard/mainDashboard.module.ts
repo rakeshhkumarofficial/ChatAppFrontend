@@ -12,6 +12,7 @@ import { HttpClient } from '@microsoft/signalr';
 import { HttpClientModule } from '@angular/common/http';
 import { ChangePassComponent } from './changePaswword/changepass.component';
 import { UpdateProfileComponent } from './update-profile/updateprofile.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UpdateProfileComponent } from './update-profile/updateprofile.component
     CommonModule,
     MainRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   exports:[
    

@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthInterceptor } from './authComponent/interceptor/auth.interceptor';
 import { ChatServiceService } from './mainDashboard/services/chat-service.service';
 import { SocketconnectionService } from './services/socket/socketconnection.service';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +21,7 @@ import { SocketconnectionService } from './services/socket/socketconnection.serv
     NgbModule,
     ReactiveFormsModule,
     HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [
     { 

@@ -3,17 +3,9 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item ">
-            <button class="btn btn-primary"  (click)="changePassword()">change Password</button>
-        </li>
-        <li class="nav-item ">
-          <button class="btn btn-primary"  (click)="startChat()">start chat</button>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-primary"  (click)="updateProfile()">Update</button>
-       </li>
-        <li class="nav-item">
-         <button class="btn btn-primary"  (click)="logOut()">logOut</button>
+      
+        <li class="nav-item" *ngFor="let navItems of navLink">
+          <button class="btn btn-primary"  (click)="submit($event)" value={{navItems.click}}>{{navItems.name}}</button>
         </li>
       </ul>
     </div>

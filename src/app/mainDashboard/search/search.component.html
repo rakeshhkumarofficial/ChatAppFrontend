@@ -14,7 +14,7 @@
         </div>
         <div class="discussion message" *ngFor="let users of allsearchUser">
           <div class="photo"
-            style="background-image: url({{users.profilePic}});">
+            style="background-image: url({{ImageLink}}{{users.profilePic}});">
             <a></a>
             <div class="online"></div>
           </div>
@@ -25,9 +25,7 @@
           <div class="timer">12 sec</div>
         </div>
         <div class="discussion message" *ngFor="let users of getchatData?.data">
-          <div class="photo"
-        > <a  target="_blank" download="custom-filename.jpg"  href="{{users.profilePic}}"><img  src={{users.profilePic}}></a>
-            <div class="online"></div>
+          <div class="photo"><a  target="_blank" download="custom-filename.jpg"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}}></a>
             <p class="message"*ngIf="users.isActive==true">Online</p>
             <p class="message"*ngIf="users.isActive==false">offline</p>
           </div>
@@ -46,16 +44,16 @@
           <p class="name">{{userName}}</p>
           <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
         </div>
-        <div style="overflow-y: scroll; height:400px;" id="scroll">        
+        <div style="overflow-y: auto; height:400px;" #scroll [scrollTop]="scroll.scrollHeight"   id="scroll"  infinite-scroll   [scrollWindow]="false"
+        [alwaysCallback]="false" (scrolled)="onScroll()" (scrolledUp)="onScrollUp()" >        
           <div class="messages-chat"  *ngFor="let msg of old_msg">
 
 
           <div *ngIf="msg.senderEmail==userEmail; then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
             <div class="message" >
-              <div class="photo"
-                style="background-image: url({{demoProfile}});">
-                <div class="online"></div>
+              <div class="photo">
+                <a  target="_blank" download="custom-filename.jpg"  href="{{ImageLink}}{{msgProfile}}"><img width="40" height="40" src={{ImageLink}}{{msgProfile}}></a>
               </div>
               <a  target="_blank" download="custom-filename.jpg" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="200" height="200" src={{msg.messages}}></a>
                 <p  *ngIf="msg?.messageType==1" class="text"> {{msg.messages}} </p>
@@ -83,11 +81,11 @@
               <option  value=2>img</option>
               <option value=3>pdf</option>
             </select>
-            <div *ngIf="x==2">
+            <div *ngIf="filetype==2">
               <form (change)="upload(2,$event)">
                 <input  type="file" accept="image/*"  placeholder="upload file">
               </form></div>
-            <div *ngIf="x==3">
+            <div *ngIf="filetype==3">
               <form (change)="upload(3,$event)">
                 <input  type="file" accept="pdf/*" accept="application/pdf"  placeholder="upload file"  >
               

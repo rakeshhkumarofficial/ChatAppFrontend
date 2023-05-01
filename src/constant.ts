@@ -13,3 +13,21 @@ export const constant = {
    }
 
 }
+export const navLink=[
+    {
+    name:'Change Password',
+    click:'changePassword'
+    },
+    {
+    name:'Start chat',
+    click:'startChat'
+    },
+    {
+    name:'Update',
+    click:'updateProfile'
+    },
+    {
+    name:'LogOut',
+    click:'logOut'
+    },
+]

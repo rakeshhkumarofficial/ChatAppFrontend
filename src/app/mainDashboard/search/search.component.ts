@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { SocketconnectionService } from 'src/app/services/socket/socketconnection.service';
 import { ChatServiceService } from '../services/chat-service.service';
 import Swal from 'sweetalert2';
+import { AfterViewInit ,ChangeDetectorRef,AfterViewChecked} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageLink } from 'src/constant';
 @Component({
@@ -10,8 +11,10 @@ import { ImageLink } from 'src/constant';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
-  ImageLink:any=ImageLink
+export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
+
+  page: number = 1;
+  ImageLink: any = ImageLink
   allsearchUser: any = []
   searchForm: FormGroup
   sendMessage: FormGroup
@@ -20,14 +23,15 @@ export class SearchComponent implements OnInit {
   resivedata: any[] | undefined;
   message: any;
   old_msg: any;
-  x: Number = 0;
+  filetype: Number = 0;
   sendFile: any;
   type: Number = 1;
-demoPic: any;
-demoProfile: any;
-getchatData:any;
-onlineUser: any;
-  constructor(private userdata: ChatServiceService, private fb: FormBuilder, private hub: SocketconnectionService, private data: AuthService) {
+  demoPic: any;
+  demoProfile: any;
+  getchatData: any;
+  onlineUser: any;
+  msgProfile: any
+  constructor(private changeDetector:ChangeDetectorRef,private userdata: ChatServiceService, private fb: FormBuilder, private hub: SocketconnectionService, private data: AuthService) {
     this.searchForm = this.fb.group({
       name: [''],
     })
@@ -39,13 +43,22 @@ onlineUser: any;
       this.old_msg.push(response1.data);
     })
   }
+  ngAfterViewInit() {
+    this.changeDetector.detectChanges()
+
+  }
+  ngAfterViewChecked(){
+    this.changeDetector.detectChanges()
+  }
   startchat(user: any) {
     this.userName = user.firstName;
+    this.msgProfile = user.profilePic
+    console.log(this.msgProfile)
     this.userEmail = user.email;
     this.hub.socketConnection.invoke('CreateChat', user.email).then((response: any) => {
       this.message = response;
       console.log(this.message?.data?.receiverEmail, "email")
-      this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, 1).then((response: any) => {
+      this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, this.page).then((response: any) => {
         console.log(this.old_msg = response.data.messages, "load msg")
         console.log('gs', this.message)
       })
@@ -55,12 +68,10 @@ onlineUser: any;
     console.log(this.type, "jhgca")
     this.hub.socketConnection.invoke('SendMessage', this.message?.data?.receiverEmail, this.sendMessage.value.msg, this.type).then((response: any) => {
       console.log(response);
-      this.type = 1;   
+      this.type = 1;
     })
     const scrollTop = document.getElementById('scroll');
-    scrollTop && (scrollTop.scrollTop = scrollTop.scrollHeight)
-    scrollTop && (scrollTop.scrollTop = scrollTop.scrollHeight)
-    console.log(this.sendMessage.value.msg)
+
     this.sendMessage.reset();
   }
   searchUser() {
@@ -72,7 +83,7 @@ onlineUser: any;
   }
   onChange(data: any) {
     console.log(data.target.value)
-    this.x = data.target.value;
+    this.filetype = data.target.value;
   }
   upload(id: any, event: any) {
     let formData = new FormData;
@@ -86,14 +97,32 @@ onlineUser: any;
         msg: new FormControl(ImageLink + this.sendFile),
       });
     })
-    this.x = 0;
+    this.filetype = 0;
   }
-   async ngOnInit(){
-setTimeout(()=>{this.hub.invokeMethod().then((res:any)=>{
-  console.log(res)
-  this.getchatData=res
-})},1000)
+  async ngOnInit() {
+    setTimeout(() => {
+      this.hub.invokeMethod().then((res: any) => {
+        console.log(res)
+        this.getchatData = res
+      })
+    }, 1000)
+  }
+  onScrollUp() {
+    if (!(this.old_msg.length < 20*this.page)) {
+      this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, ++this.page).then((response: any) => {
+        console.log(response)
+        this.old_msg.unshift(...response.data.messages)
+      })
+    }
+  }
 
+  onScroll() {
+    if (this.page > 1) {
+      this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, --this.page).then((response: any) => {
+        this.old_msg.unshift(...response.data.messages)
+      })
+    }
 
-   }
+  }
+
 }

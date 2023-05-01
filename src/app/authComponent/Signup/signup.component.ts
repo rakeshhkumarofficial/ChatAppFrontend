@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
       } else {
         this.validAge = false
       }
-
     }
   }
   registerUser() {
