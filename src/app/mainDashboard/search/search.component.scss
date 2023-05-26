@@ -225,8 +225,9 @@ body {
     width: 45px;
     height: 45px;
     background: #E6E7ED;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
+    // -moz-border-radius: 50px;
+    // -webkit-border-radius: 50px;
+    border-radius: 50px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -236,8 +237,9 @@ body {
   width: 45px;
   height: 45px;
   background: #E6E7ED;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
+  // -moz-border-radius: 50px;
+  // -webkit-border-radius: 50px;
+  border-radius: 50px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
