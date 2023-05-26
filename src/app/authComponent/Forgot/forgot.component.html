@@ -7,32 +7,23 @@
                    
                 </div>
                 <div class="text-center">
-                    <h2>Welcome</h2>
+                    <h2 style="color:#6495ED ">CHAT<Span style="color: #34495E ;">APP</Span></h2>
                 </div>
-                <p style="color: lightslategray; text-align: center;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your email
-                    to get email link&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                
                 <form [formGroup]="forgotForm" (ngSubmit)="forgotUser()"  >
                     <div class="form-group">
-                        <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
+                        <input type="email" id="email" placeholder="Please Enter Your Email" class="form-control" formControlName="email"
                             name="email"  required/>
-                            <div class="form-text text-danger" *ngIf="forgotForm.controls['email'].touched && !forgotForm.controls['email'].valid ">email is required in correct format</div>
+                            <div class="form-text text-danger" *ngIf="forgotForm.controls['email'].touched && !forgotForm.controls['email'].valid ">Email is Required</div>
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary w-100"  name="">
                 </form>
-            <small style="color: lightslategray; text-align: center;">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Don't have Acoount ?
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
-        
         <div class="card-footer text-right">
-            <small type="button" (click)="SignUp()" >SignUp</small>
-        </div>
-        <small style="color: lightslategray; text-align: center;">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rembember
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
-        <div class="card-footer text-left">
-            <small type="button" (click)="login()">Login</small>
+                <small style="color: lightslategray; margin-right:5px;">Don't have Account?</small>
+                <small type="button" (click)="SignUp()" >Signup</small>
+                <small type="button" (click)="login()" style="float: right;">Login</small>
+                <small style="color: lightslategray; margin-right:5px;float: right;">Already have Account?</small>
         </div>
             </div>
         </div>

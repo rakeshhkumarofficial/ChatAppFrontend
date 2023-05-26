@@ -33,8 +33,8 @@ export class ResetComponent {
       this.authData.removeToken();
       this.resetForm.reset();
       Swal.fire(
-        'password change  sucessfully',
-        'login again',
+        'Password Reset Successfull',
+        'Login Again',
         'success'
       )
       this.routes.navigateByUrl("/main/login")

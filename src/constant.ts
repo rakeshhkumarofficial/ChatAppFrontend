@@ -19,15 +19,15 @@ export const navLink=[
     click:'changePassword'
     },
     {
-    name:'Start chat',
+    name:'Chat',
     click:'startChat'
     },
     {
-    name:'Update',
+    name:'Profile',
     click:'updateProfile'
     },
     {
-    name:'LogOut',
+    name:'Logout',
     click:'logOut'
-    },
+    }
 ]

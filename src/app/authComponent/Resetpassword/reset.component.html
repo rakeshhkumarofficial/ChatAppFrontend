@@ -5,27 +5,26 @@
                 <div class="text-center">
                 </div>
                 <div class="text-center">
-                    <h2>Welcome</h2>
+                    <h2 style="color:#6495ED ">CHAT<Span style="color: #34495E ;">APP</Span></h2>
                 </div>
                 <p style="color: lightslategray; text-align: center;">
-                   Please enter your new
-                    password ;</p>
+                   Reset Password</p>
                 <form [formGroup]="resetForm" (ngSubmit)="resetUser()">
                     <div class="form-group">
-                        <input type="password" id="newPassword" placeholder="new password" class="form-control"
+                        <input type="password" id="newPassword" placeholder="New Password" class="form-control"
                             formControlName="newPassword" name="newPassword" #pw />
                         <div class="form-text text-danger"
-                            *ngIf="(!passwordsMatching && isConfirmPasswordDirty)  || (resetForm.controls['newPassword'].touched && !resetForm.controls['newPassword'].valid)"> new
-                            password is required min 8 digit with title case and one symbol and password should be same as confirm password</div>
+                            *ngIf="(!passwordsMatching && isConfirmPasswordDirty)  || (resetForm.controls['newPassword'].touched && !resetForm.controls['newPassword'].valid)">
+                            Password should be of min 8 length contains One uppercase , lowercase and Special Symbol and numbers</div>
                     </div>
                     <br>
                     <div class="form-group">
-                        <input type="password" id="confirmPassword" placeholder="confirmPassword" class="form-control"
+                        <input type="password" id="confirmPassword" placeholder="Confirm Password" class="form-control"
                             formControlName="confirmPassword" name="confirmPassword" 
                             #cpw (keyup)='checkPasswords(pw.value, cpw.value)'/>
                             <div class="form-text text-danger"
-                            *ngIf="(!passwordsMatching && isConfirmPasswordDirty ) || (resetForm.controls['confirmPassword'].touched && !resetForm.controls['confirmPassword'].valid)"> new
-                            password is required min 8 digit with title case and one symbol and password should be same as new password </div>
+                            *ngIf="(!passwordsMatching && isConfirmPasswordDirty ) || (resetForm.controls['confirmPassword'].touched && !resetForm.controls['confirmPassword'].valid)">
+                            Password should be of min 8 length contains One uppercase , lowercase and Special Symbol and numbers</div>
                     </div>
                     
                     <br>
@@ -34,19 +33,6 @@
                     </div>
                     <input type="submit" class="btn btn-primary w-100">
                 </form>
-                <small style="color: lightslategray; text-align: center;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Don't have Acoount ?
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
-
-                <div class="card-footer text-right">
-                    <small type="button" (click)="SignUp()">SignUp</small>
-                </div>
-                <small style="color: lightslategray; text-align: center;">
-                   Rembember
-                    </small>
-                <div class="card-footer text-left">
-                    <small type="button" (click)="login()">Login</small>
-                </div>
             </div>
         </div>
     </div>

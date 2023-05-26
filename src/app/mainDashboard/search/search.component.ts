@@ -51,8 +51,8 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
     this.changeDetector.detectChanges()
   }
   startchat(user: any) {
-    this.userName = user.firstName;
-    this.msgProfile = user.profilePic
+    this.userName = user.firstName + " " + user.lastName;
+    this.msgProfile = user.profilePic;
     console.log(this.msgProfile)
     this.userEmail = user.email;
     this.hub.socketConnection.invoke('CreateChat', user.email).then((response: any) => {

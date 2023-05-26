@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Your  has been register',
+            title: 'Registered Successfully',
             showConfirmButton: false,
             timer: 1500
           })
@@ -69,7 +69,7 @@ export class SignupComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'email alredy exit',
+            text: 'Email Already Exists',
           })
         }
       })

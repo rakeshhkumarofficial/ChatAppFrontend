@@ -26,8 +26,8 @@ callFunction:any
     if(event.target.value=='logOut'){
       this.authdata.logout();
       Swal.fire(
-        'logout sucessfully',
-        'you has been logout',
+        'Logout Successfull',
+        'You have been logout',
         'success'
       )
     }

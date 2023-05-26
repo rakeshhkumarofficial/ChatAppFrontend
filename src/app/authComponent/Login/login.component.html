@@ -4,39 +4,28 @@
         <div class="card my-auto shadow">
             <div class="card-body px-5">
                 <div class="text-center">
-                   
+                    <h2 style="color:#6495ED ">CHAT<Span style="color: #34495E ;">APP</Span></h2>
                 </div>
-                <div class="text-center">
-                    <h2>Welcome</h2>
-                </div>
-                <p style="color: lightslategray; text-align: center;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please enter your login
-                    details&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <form [formGroup]="loginForm" (ngSubmit)="loginUser()" >
                     <div class="form-group">
                         <input type="email" id="email" placeholder="Email" class="form-control" formControlName="email"
                             name="email"  required/>
-                            <div class="form-text text-danger" *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid ">email is required in correct format</div>
+                            <div class="form-text text-danger" *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].valid ">Email is Required</div>
                     </div>
                     <br>
                     <div class="form-group">
                         <input type="password" id="password" placeholder="Password" class="form-control"
                             formControlName="password" name="password" />
-                            <div class="form-text text-danger" *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">password is required min 8 digit with title case and one symbol </div>
+                            <div class="form-text text-danger" *ngIf="loginForm.controls['password'].touched && !loginForm.controls['password'].valid">Password is Required</div>
                     </div>
                     <br>
                     <input type="submit" class="btn btn-primary w-100" value="Login" name="">
                 </form>
             </div>
-            <div class="card-footer text-left">
-                <small type="button" (click)="forgot()" >Forgot Password</small>
-            </div>
-                <small style="color: lightslategray;">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Don't have Acoount ?
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
-            
-            <div class="card-footer text-right">
-                <small type="button" (click)="SignUp()" >SignUp</small>
+            <div class="card-footer text-left" style="display: inline-block;">
+                <small style="color: lightslategray; margin-right:5px;">Don't have Account?</small>
+                <small type="button" (click)="SignUp()" >Register</small>
+                <small type="button" (click)="forgot()" style="float: right;">Forgot Password?</small>
             </div>
         </div>
     </div>

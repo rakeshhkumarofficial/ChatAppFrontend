@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'You has been login Sucesfully',
+            title: 'Login Succesfull',
             showConfirmButton: false,
             timer: 1500
           })
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Something went wrong!',
+            text: 'Wrong credentials',
           })
         }
       })
