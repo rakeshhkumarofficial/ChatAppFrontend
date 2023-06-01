@@ -15,11 +15,11 @@
           </div>
         </div>
         <div style="margin-top: 50px;" ></div>     
-        <div class="discussion message" *ngFor="let users of allsearchUser">
+        <div class="discussion message" *ngFor="let users of allsearchUser?.data">
           
-            <div class="photo"
-              style="background-image: url({{ImageLink}}{{users.profilePic}});">
-            </div>
+          <div class="photo" style="margin-left: 40px;">
+            <a  target="_blank"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}} style="border-radius: 40px;"></a>
+          </div>
             <div  class="desc-contact" class="btn" (click)="startchat(users)">
               <p class="name">{{users.firstName + " "+users.lastName}}</p>
             </div>
@@ -27,7 +27,7 @@
         <div class="discussion message" *ngFor="let users of getchatData?.data">
           <span class="indicator offline message"*ngIf="users.isActive==false"></span>
           <span class="indicator online message"*ngIf="users.isActive==true"></span>
-          <div class="photo" style="text-align: center;">
+          <div class="photo" style="margin-left: 40px;">
             <a  target="_blank"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}} style="border-radius: 40px;"></a>
           </div>
           <div class="desc-contact" class="btn" (click)="startchat(users)">
@@ -37,8 +37,8 @@
       </section>
       <section class="chat">
         <div class="header-chat">
-          <div class="photo-chat"
-            style="background-image: url({{ImageLink}}{{msgProfile}});">
+          <div class="photo-chat">
+            <a  target="_blank"  href="{{ImageLink}}{{msgProfile}}"><img width="45" height="45" src={{ImageLink}}{{msgProfile}} style="border-radius: 40px;"></a>
           </div>
           <p class="name">{{userName}}</p>
         </div>
@@ -76,11 +76,12 @@
             </div>
           </ng-template>
         </div>
-        <div *ngIf="waitingForResponse">
+        <!-- <div *ngIf="waitingForResponse">
           <img src="https://cdn.dribbble.com/users/446605/screenshots/5651664/step2_sending.gif" alt="" style="width: 150px;height: 150px;">
+        </div> -->
+        <!-- ngIf="!waitingForResponse" -->
         </div>
-        </div>
-        <div *ngIf="!waitingForResponse" class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
+        <div  class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
           <form [formGroup]="sendMessage" (ngSubmit)="sendMsg()">
             <input type="text" placeholder="Type Messge" value="hello" formControlName="msg" style="float: left; width: 50%;" class="form-control">
           <form style="float: left;">

@@ -88,9 +88,8 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
     this.sendMessage.reset();
   }
   searchUser() {
-    console.log(this.searchForm.value)
     this.userdata.searchUser(this.searchForm.value).subscribe((res: any) => {
-      this.allsearchUser = res.data;
+      this.allsearchUser = res;
       console.log(this.allsearchUser)
     })
   }
