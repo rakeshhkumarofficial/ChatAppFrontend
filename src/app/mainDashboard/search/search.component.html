@@ -50,9 +50,9 @@
           <ng-template #thenBlock>
             <div class="message" >
               <div class="photo">
-                <a  target="_blank" download="custom-filename.jpg"  href="{{ImageLink}}{{msgProfile}}"><img width="45" height="45" style="border-radius: 50px;" src={{ImageLink}}{{msgProfile}}></a>
+                <a  target="_blank"  href="{{ImageLink}}{{msgProfile}}"><img width="45" height="45" style="border-radius: 50px;" src={{ImageLink}}{{msgProfile}}></a>
               </div>
-              <a  target="_blank" download="custom-filename.jpg" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="220" height="200" style="border-radius: 10px; margin-left: 20px; margin-top: 10px;" src={{msg.messages}}></a>
+              <a  target="_blank" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="220" height="200" style="border-radius: 10px; margin-left: 20px; margin-top: 10px;" src={{msg.messages}}></a>
                 <p  *ngIf="msg?.messageType==1" class="text" style="margin-top:10px;background-color:#e3effd;margin-left: 20px;"> {{msg.messages}} </p>
                 <p style="margin-left:20px; margin-top:15px;"><a  target="_blank" *ngIf="msg?.messageType==3" href={{msg.messages}}><button type="button" class="btn btn-danger">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-pdf" viewBox="0 0 16 16">
@@ -76,12 +76,9 @@
             </div>
           </ng-template>
         </div>
-        <!-- <div *ngIf="waitingForResponse">
-          <img src="https://cdn.dribbble.com/users/446605/screenshots/5651664/step2_sending.gif" alt="" style="width: 150px;height: 150px;">
-        </div> -->
-        <!-- ngIf="!waitingForResponse" -->
+        
         </div>
-        <div  class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
+        <div class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
           <form [formGroup]="sendMessage" (ngSubmit)="sendMsg()">
             <input type="text" placeholder="Type Messge" value="hello" formControlName="msg" style="float: left; width: 50%;" class="form-control">
           <form style="float: left;">

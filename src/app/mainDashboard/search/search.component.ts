@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
 
   page: number = 1;
   ImageLink: any = ImageLink
-  waitingForResponse=false
+  //waitingForResponse=false
   allsearchUser: any = []
   searchForm: FormGroup
   sendMessage: FormGroup
@@ -68,7 +68,10 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   }
   
   sendMsg() {
-    this.waitingForResponse=true
+    // if(this.message?.data?.receiverEmail=="chat@gmail.com"){
+    //   this.waitingForResponse=true;
+    // }
+
     this.hub.socketConnection.invoke('SendMessage', this.message?.data?.receiverEmail, this.sendMessage.value.msg, this.type).then((response: any) => {
       console.log(response);
       this.type = 1;
@@ -76,9 +79,9 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
       if(this.message?.data?.receiverEmail=="chat@gmail.com"){
         setTimeout(() => {
           this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, this.page).then((response: any) => {
-            this.waitingForResponse=false;
+           // this.waitingForResponse=false;
             console.log(this.old_msg = response.data.messages, "load msg")
-            console.log('gs', this.message)
+            console.log('bot messages: ', this.message)
           })
         },1000);
       }
