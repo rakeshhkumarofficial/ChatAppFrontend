@@ -16,18 +16,19 @@
         </div>
         <div style="margin-top: 50px;" ></div>     
         <div class="discussion message" *ngFor="let users of allsearchUser">
+          
             <div class="photo"
               style="background-image: url({{ImageLink}}{{users.profilePic}});">
             </div>
-            <div class="desc-contact" class="btn" (click)="startchat(users)">
+            <div  class="desc-contact" class="btn" (click)="startchat(users)">
               <p class="name">{{users.firstName + " "+users.lastName}}</p>
             </div>
           </div>
         <div class="discussion message" *ngFor="let users of getchatData?.data">
           <span class="indicator offline message"*ngIf="users.isActive==false"></span>
           <span class="indicator online message"*ngIf="users.isActive==true"></span>
-          <div class="photo" style="text-align: center;"><a  target="_blank" download="custom-filename.jpg"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}} style="border-radius: 40px;"></a>
-            
+          <div class="photo" style="text-align: center;">
+            <a  target="_blank"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}} style="border-radius: 40px;"></a>
           </div>
           <div class="desc-contact" class="btn" (click)="startchat(users)">
             <p class="name">{{users.firstName + " "+users.lastName}}</p> 
@@ -75,8 +76,11 @@
             </div>
           </ng-template>
         </div>
+        <div *ngIf="waitingForResponse">
+          <img src="https://cdn.dribbble.com/users/446605/screenshots/5651664/step2_sending.gif" alt="" style="width: 150px;height: 150px;">
         </div>
-        <div class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
+        </div>
+        <div *ngIf="!waitingForResponse" class="alert alert-dark" role="alert" style="display: inline-block; width: 100%;">
           <form [formGroup]="sendMessage" (ngSubmit)="sendMsg()">
             <input type="text" placeholder="Type Messge" value="hello" formControlName="msg" style="float: left; width: 50%;" class="form-control">
           <form style="float: left;">

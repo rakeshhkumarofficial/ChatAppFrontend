@@ -11,9 +11,6 @@ export class SocketconnectionService {
 
   connectionkey:boolean=false
 
-
-  
-  
 public socketConnection :signalR.HubConnection |any
   constructor() { }
   public startConnection(){
@@ -23,17 +20,15 @@ public socketConnection :signalR.HubConnection |any
            transport: signalR.HttpTransportType.WebSockets,
            accessTokenFactory :()=> token
       }).withAutomaticReconnect().build();
-      
      this.socketConnection.start().then((res:any)=>{
        this.connectionkey=true;
-       console.log("connected")
+       console.log("connected");
        
      }).catch((error:any)=>{
            this.connectionkey=false;
      }
      )
   }
-
 
   invokeMethod() {
     if(this.connectionkey==true){
@@ -48,5 +43,5 @@ getonlineUsers() {
 }
 
 }
-// export const connectionkey;
+//export const connectionkey;
 

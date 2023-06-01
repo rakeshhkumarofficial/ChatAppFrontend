@@ -61,7 +61,7 @@ export class UpdateProfileComponent implements OnInit {
           if(res.statusCode==200){
             Swal.fire(
               'Good job!',
-              'profile has benn updated!',
+              'Profile Has been Updated',
               'success'
             )
             this.routes.navigateByUrl("home")
@@ -70,7 +70,7 @@ export class UpdateProfileComponent implements OnInit {
       }
     }
     upload( event: any) {
-      console.log(event.target.files[0], "fileeeeeeeeeeeeeeeeeeeeeeeee")
+      console.log(event.target.files[0], "file")
       let formData = new FormData;
       formData.append("File", event.target.files[0])
       this.authData.uploadFile(formData, 1).subscribe((res: any) => {

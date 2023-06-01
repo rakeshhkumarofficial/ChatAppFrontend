@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
       this.authData.loginUser(this.loginForm.value).subscribe((res: any) => {
         console.log(res);
         if (res.statusCode == 200) {
+          this.hub.startConnection()
           this.authData.registerToken(res.data['token']);
           this.routes.navigate(['/home'], {
             state: {
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
               'token': res.data['token']
             }
           })
-          this.hub.startConnection()
+          
           Swal.fire({
             position: 'top-end',
             icon: 'success',

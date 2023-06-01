@@ -11,7 +11,6 @@ export const constant = {
    User:{
     search:'User/Search'
    }
-
 }
 export const navLink=[
     {

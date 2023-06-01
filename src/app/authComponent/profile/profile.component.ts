@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class profileComponent {
     constructor(private data:AuthService,private routes :Router){}
     upload( event: any) {
-        console.log(event.target.files[0], "fileeeeeeeeeeeeeeeeeeeeeeeee")
+        console.log(event.target.files[0], "file")
         let formData = new FormData;
         formData.append("File", event.target.files[0])
         this.data.uploadFile(formData, 1).subscribe((res: any) => {
@@ -21,7 +21,7 @@ export class profileComponent {
           });
         }
         skip(){
-          this.routes.navigateByUrl("/home")
+          this.routes.navigate(['/main'])
         }
   
       }

@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { AfterViewInit ,ChangeDetectorRef,AfterViewChecked} from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageLink } from 'src/constant';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -15,6 +16,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
 
   page: number = 1;
   ImageLink: any = ImageLink
+  waitingForResponse=false
   allsearchUser: any = []
   searchForm: FormGroup
   sendMessage: FormGroup
@@ -31,7 +33,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   getchatData: any;
   onlineUser: any;
   msgProfile: any
-  constructor(private changeDetector:ChangeDetectorRef,private userdata: ChatServiceService, private fb: FormBuilder, private hub: SocketconnectionService, private data: AuthService) {
+  constructor(private changeDetector:ChangeDetectorRef,private userdata: ChatServiceService, private fb: FormBuilder, private hub: SocketconnectionService, private data: AuthService,private route:Router) {
     this.searchForm = this.fb.group({
       name: [''],
     })
@@ -59,16 +61,27 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
       this.message = response;
       console.log(this.message?.data?.receiverEmail, "email")
       this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, this.page).then((response: any) => {
-        console.log(this.old_msg = response.data.messages, "load msg")
-        console.log('gs', this.message)
+        console.log(this.old_msg = response.data.messages, "load messages")
+        console.log('message is: ', this.message)
       })
     })
   }
+  
   sendMsg() {
-    console.log(this.type, "jhgca")
+    this.waitingForResponse=true
     this.hub.socketConnection.invoke('SendMessage', this.message?.data?.receiverEmail, this.sendMessage.value.msg, this.type).then((response: any) => {
       console.log(response);
       this.type = 1;
+      
+      if(this.message?.data?.receiverEmail=="chat@gmail.com"){
+        setTimeout(() => {
+          this.hub.socketConnection.invoke('LoadMessages', this.message?.data?.receiverEmail, this.page).then((response: any) => {
+            this.waitingForResponse=false;
+            console.log(this.old_msg = response.data.messages, "load msg")
+            console.log('gs', this.message)
+          })
+        },1000);
+      }
     })
     const scrollTop = document.getElementById('scroll');
 
@@ -101,7 +114,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   }
   async ngOnInit() {
     setTimeout(() => {
-      this.hub.invokeMethod().then((res: any) => {
+      this.hub.invokeMethod()?.then((res: any) => {
         console.log(res)
         this.getchatData = res
       })
