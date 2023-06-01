@@ -27,7 +27,7 @@
         <div class="discussion message" *ngFor="let users of getchatData?.data">
           <span class="indicator offline message"*ngIf="users.isActive==false"></span>
           <span class="indicator online message"*ngIf="users.isActive==true"></span>
-          <div class="photo" style="margin-left: 40px;">
+          <div class="photo" style="margin-left: 10px;">
             <a  target="_blank"  href="{{ImageLink}}{{users.profilePic}}"><img width="40" height="40" src={{ImageLink}}{{users.profilePic}} style="border-radius: 40px;"></a>
           </div>
           <div class="desc-contact" class="btn" (click)="startchat(users)">

@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
 
   page: number = 1;
   ImageLink: any = ImageLink
-  //waitingForResponse=false
+  waitingForResponse=false
   allsearchUser: any = []
   searchForm: FormGroup
   sendMessage: FormGroup
@@ -68,9 +68,9 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   }
   
   sendMsg() {
-    // if(this.message?.data?.receiverEmail=="chat@gmail.com"){
-    //   this.waitingForResponse=true;
-    // }
+    if(this.message?.data?.receiverEmail=="chat@gmail.com"){
+      this.waitingForResponse=true;
+    }
 
     this.hub.socketConnection.invoke('SendMessage', this.message?.data?.receiverEmail, this.sendMessage.value.msg, this.type).then((response: any) => {
       console.log(response);
@@ -121,6 +121,12 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
         this.getchatData = res
       })
     }, 1000)
+    this.hub.socketConnection.on('refreshChats',()=>{
+      this.hub.invokeMethod()?.then((res: any) => {
+        console.log(res)
+        this.getchatData = res
+      })
+    })
   }
   onScrollUp() {
     if (!(this.old_msg.length < 20*this.page)) {

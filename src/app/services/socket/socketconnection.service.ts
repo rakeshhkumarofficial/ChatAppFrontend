@@ -9,7 +9,7 @@ const token :any  = localStorage.getItem("token");
 })
 export class SocketconnectionService {
 
-  connectionkey:boolean=false
+  connectionkey:boolean=false;
 
 public socketConnection :signalR.HubConnection |any
   constructor() { }
