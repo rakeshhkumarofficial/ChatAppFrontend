@@ -38,7 +38,7 @@
       <section class="chat">
         <div class="header-chat">
           <div class="photo-chat">
-            <a  target="_blank"  href="{{ImageLink}}{{msgProfile}}"><img width="45" height="45" src={{ImageLink}}{{msgProfile}} style="border-radius: 40px;"></a>
+            <a  target="_blank"  href="{{msgProfile}}"><img width="45" height="45" src={{msgProfile}} style="border-radius: 40px;"></a>
           </div>
           <p class="name">{{userName}}</p>
         </div>
@@ -50,7 +50,7 @@
           <ng-template #thenBlock>
             <div class="message" >
               <div class="photo">
-                <a  target="_blank"  href="{{ImageLink}}{{msgProfile}}"><img width="45" height="45" style="border-radius: 50px;" src={{ImageLink}}{{msgProfile}}></a>
+                <a  target="_blank"  href="{{msgProfile}}"><img width="45" height="45" style="border-radius: 50px;" src={{msgProfile}}></a>
               </div>
               <a  target="_blank" *ngIf="msg?.messageType==2" href="{{msg.messages}}"><img width="220" height="200" style="border-radius: 10px; margin-left: 20px; margin-top: 10px;" src={{msg.messages}}></a>
                 <p  *ngIf="msg?.messageType==1" class="text" style="margin-top:10px;background-color:#e3effd;margin-left: 20px;"> {{msg.messages}} </p>

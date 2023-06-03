@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       this.authData.loginUser(this.loginForm.value).subscribe((res: any) => {
         console.log(res);
         if (res.statusCode == 200) {
-          this.hub.startConnection()
+          this.hub.startConnection();
           this.authData.registerToken(res.data['token']);
           this.routes.navigate(['/home'], {
             state: {
@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
+          
         }
         else {
           Swal.fire({

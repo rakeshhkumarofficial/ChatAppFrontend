@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   onlineUser: any;
   msgProfile: any
   constructor(private changeDetector:ChangeDetectorRef,private userdata: ChatServiceService, private fb: FormBuilder, private hub: SocketconnectionService, private data: AuthService,private route:Router) {
+    this.msgProfile ="https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1685772862~exp=1685773462~hmac=56bd0b9e3758f9400fb58f87d752a8e90667911ae859c1bff1c59049b68a7e78"
     this.searchForm = this.fb.group({
       name: [''],
     })
@@ -54,7 +55,7 @@ export class SearchComponent implements OnInit, AfterViewInit,AfterViewChecked {
   }
   startchat(user: any) {
     this.userName = user.firstName + " " + user.lastName;
-    this.msgProfile = user.profilePic;
+    this.msgProfile = ImageLink + user.profilePic;
     console.log(this.msgProfile)
     this.userEmail = user.email;
     this.hub.socketConnection.invoke('CreateChat', user.email).then((response: any) => {

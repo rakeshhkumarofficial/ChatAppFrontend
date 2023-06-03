@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as signalR from "@microsoft/signalr";
 import { chatconnection } from 'src/constant';
-import { HttpClient } from '@microsoft/signalr';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+//import { HttpClient } from '@microsoft/signalr';
+//import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 const token :any  = localStorage.getItem("token");
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,7 @@ public socketConnection :signalR.HubConnection |any
        
      }).catch((error:any)=>{
            this.connectionkey=false;
+           console.log(error);
      }
      )
   }
